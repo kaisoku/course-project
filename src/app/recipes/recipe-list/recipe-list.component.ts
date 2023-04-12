@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -19,4 +19,10 @@ export class RecipeListComponent {
       'http://www.cuisine-francaise.org/blog/wp-content/uploads/2009/10/COQUILLES-SAINT-JACQUES-PIERRTTES-GUIDE.jpg'
     ),
   ];
+
+  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+
+  onRecipeSelected(recipe: Recipe) {
+    this.recipeWasSelected.emit(recipe);
+  }
 }
