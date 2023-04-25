@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { config } from '../../../config';
 
 export interface AuthResponseData {
   kind: string;
@@ -22,7 +23,7 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC9f_rN3Pl-rc4zWyoLHIXaPVsG2bkGYok',
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${config.API_KEY}`,
         {
           email,
           password,
@@ -35,7 +36,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC9f_rN3Pl-rc4zWyoLHIXaPVsG2bkGYok',
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${config.API_KEY}`,
         {
           email,
           password,
