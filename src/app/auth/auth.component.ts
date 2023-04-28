@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthResponseData, AuthService } from './auth.service';
 import { Observable } from 'rxjs';
@@ -8,12 +8,14 @@ import { Router } from '@angular/router';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   isLogginMode = true;
   isLoading = false;
   error: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {}
 
   onSwithMode() {
     this.isLogginMode = !this.isLogginMode;
@@ -50,5 +52,9 @@ export class AuthComponent {
         this.isLoading = false;
       },
     });
+  }
+
+  onHandleError() {
+    this.error = null;
   }
 }
