@@ -138,7 +138,7 @@ export class AuthService {
         errorMessage =
           "Aucun enregistrement d'utilisateur ne correspond à cet identifiant. L'utilisateur a peut-être été supprimé";
         break;
-      case 'NVALID_PASSWORD':
+      case 'INVALID_PASSWORD':
         errorMessage =
           "Le mot de passe n'est pas valide ou l'utilisateur n'a pas de mot de passe";
         break;
