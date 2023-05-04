@@ -10,7 +10,7 @@
           >
             Save
           </button>
-          <button type="reset" class="btn btn-danger" (click)="onCancel()">
+          <button type="button" class="btn btn-danger" (click)="onCancel()">
             Cancel
           </button>
         </div>
@@ -18,11 +18,11 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="recipeName">Name</label>
+            <label for="name">Name</label>
             <input
               type="text"
-              formControlName="recipeName"
-              id="recipeName"
+              id="name"
+              formControlName="name"
               class="form-control"
             />
           </div>
@@ -31,59 +31,52 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="recipeDescription">Description</label>
-            <textarea
-              formControlName="recipeDescription"
-              id="recipeDescription"
-              rows="3"
+            <label for="imagePath">Image URL</label>
+            <input
+              type="text"
+              id="imagePath"
+              formControlName="imagePath"
               class="form-control"
+              #imagePath
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="imagePath.value" class="img-responsive" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="6"
             ></textarea>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="recipeImage">Image Path</label>
-            <input
-              type="text"
-              formControlName="recipeImage"
-              id="recipeImage"
-              class="form-control"
-              #recipeImage
-            />
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <img [src]="recipeImage.value" class="image-responsive" />
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
           <div
             class="row"
-            style="margin-top: 10px"
-            *ngFor="let ingredientControl of controls; let i = index"
+            *ngFor="let ingredientCtrl of ingredientsControls; let i = index"
             [formGroupName]="i"
+            style="margin-top: 10px;"
           >
-            <div class="col-xs-2">
-              <label for="name">Ingredient name</label>
-              <input
-                type="text"
-                id="name"
-                formControlName="name"
-                class="form-control"
-              />
+            <div class="col-xs-8">
+              <input type="text" class="form-control" formControlName="name" />
             </div>
             <div class="col-xs-2">
-              <label for="amount"> Ingredient amount</label>
               <input
                 type="number"
-                id="amount"
-                formControlName="amount"
                 class="form-control"
+                formControlName="amount"
               />
             </div>
             <div class="col-xs-2">
@@ -102,9 +95,9 @@
               <button
                 type="button"
                 class="btn btn-success"
-                (click)="onAddIngredients()"
+                (click)="onAddIngredient()"
               >
-                Add Ingredients
+                Add Ingredient
               </button>
             </div>
           </div>

@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-const appRoute: Routes = [
+const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
     path: 'recipes',
     loadChildren: () =>
-      import('./recipes/recipes.module').then((m) => m.RecipesModule),
+      import('./recipes/recipes.module').then((mod) => mod.RecipesModule),
   },
   {
     path: 'shopping-list',
     loadChildren: () =>
       import('./shopping-list/shopping-list.module').then(
-        (m) => m.ShoppingListModule
+        (mod) => mod.ShoppingListModule
       ),
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () =>
+      import('./auth/auth.module').then((mod) => mod.AuthModule),
   },
 ];
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoute, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
   ],
   exports: [RouterModule],
 })

@@ -1,6 +1,6 @@
 <ng-template appPlaceholder></ng-template>
 <div class="row">
-  <div class="col-xs-12 col-md-6 col-offset-3">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
     <!-- <div class="alert alert-danger" *ngIf="error">
       <p>{{ error }}</p>
     </div> -->
@@ -9,18 +9,18 @@
       *ngIf="error"
       (close)="onHandleError()"
     ></app-alert> -->
-    <div *ngIf="isLoading" style="text-align: center">
+    <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isLoading">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">E-Mail</label>
         <input
-          class="form-control"
           type="email"
-          name="email"
           id="email"
+          class="form-control"
           ngModel
+          name="email"
           required
           email
         />
@@ -28,11 +28,11 @@
       <div class="form-group">
         <label for="password">Password</label>
         <input
-          class="form-control"
           type="password"
-          name="password"
           id="password"
+          class="form-control"
           ngModel
+          name="password"
           required
           minlength="6"
         />
@@ -41,18 +41,13 @@
         <button
           class="btn btn-primary"
           type="submit"
-          style="margin: 10px"
-          [disabled]="!f.valid"
+          [disabled]="!authForm.valid"
         >
-          {{ !isLogginMode ? "Sign Up" : "Login" }}
+          {{ isLoginMode ? 'Login' : 'Sign Up' }}
         </button>
-        <button
-          class="btn btn-primary"
-          type="button"
-          (click)="onSwithMode()"
-          style="margin: 10px"
-        >
-          {{ isLogginMode ? "Sign up" : " Login" }}
+        |
+        <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
+          Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
         </button>
       </div>
     </form>
